@@ -7,6 +7,9 @@ public class AudioSlider : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private TMP_Text volumeText;
     [SerializeField] private AudioSettings audioSettingsData;
+    [Header("Sprites")]
+    [SerializeField] private Sprite[] sprites;
+    [SerializeField] private Image image;
 
     private void OnEnable()
     {
@@ -34,7 +37,18 @@ public class AudioSlider : MonoBehaviour
     private void UpdateText(float value)
     {
         volumeText.text = (value * 100).ToString("000");
-
         slider.value = value;
+        if (value == 1)
+        {
+            image.sprite = sprites[2];
+        }
+        else if (value >= 0.5f)
+        {
+            image.sprite = sprites[1];
+        }
+        else
+        {
+            image.sprite = sprites[0];
+        }
     }
 }

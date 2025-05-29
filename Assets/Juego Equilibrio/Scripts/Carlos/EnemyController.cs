@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rb;
     private NavMeshAgent agent;
     private StateEnemy stateEnemy;
-
+    private Animator animator;
     [Header("Point Patrol")]
     [SerializeField] private Transform[] points;
     private int currentPointIndex;
@@ -100,6 +100,7 @@ public class EnemyController : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
+        if(points==null) return;
         Gizmos.color = Color.green;
         for (int i = 0; i < points.Length; i++)
         {

@@ -1517,6 +1517,11 @@ MonoBehaviour:
   slider: {fileID: 2082435104}
   volumeText: {fileID: 67317766}
   audioSettingsData: {fileID: 11400000, guid: fa65bb8cd814f454f84c2541ff64eaef, type: 2}
+  sprites:
+  - {fileID: 21300000, guid: 6515d6a7a9e9b21439e4dae2764daafd, type: 3}
+  - {fileID: 21300000, guid: 50792d4917bc5d64caa873c5e4394365, type: 3}
+  - {fileID: 21300000, guid: a487c899a8ca1bc42977fbae0c09c676, type: 3}
+  image: {fileID: 1821086950}
 --- !u!1 &385359608
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,6 +2619,11 @@ MonoBehaviour:
   slider: {fileID: 457033695}
   volumeText: {fileID: 837375349}
   audioSettingsData: {fileID: 11400000, guid: c78e84d6d6943a24b9fb04b3a308c7cb, type: 2}
+  sprites:
+  - {fileID: 21300000, guid: 6515d6a7a9e9b21439e4dae2764daafd, type: 3}
+  - {fileID: 21300000, guid: 50792d4917bc5d64caa873c5e4394365, type: 3}
+  - {fileID: 21300000, guid: a487c899a8ca1bc42977fbae0c09c676, type: 3}
+  image: {fileID: 1020087921}
 --- !u!1 &759164691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2880,6 +2890,11 @@ MonoBehaviour:
   slider: {fileID: 1841401724}
   volumeText: {fileID: 584402588}
   audioSettingsData: {fileID: 11400000, guid: 27e840d8b272c5f47be616fe124b8379, type: 2}
+  sprites:
+  - {fileID: 21300000, guid: 50792d4917bc5d64caa873c5e4394365, type: 3}
+  - {fileID: 21300000, guid: 6515d6a7a9e9b21439e4dae2764daafd, type: 3}
+  - {fileID: 21300000, guid: a487c899a8ca1bc42977fbae0c09c676, type: 3}
+  image: {fileID: 81942712}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
