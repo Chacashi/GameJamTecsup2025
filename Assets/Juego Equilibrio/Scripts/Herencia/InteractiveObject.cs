@@ -8,11 +8,11 @@ abstract public class InteractiveObject : MonoBehaviour
     {
         if (value)
         {
-            InputReader.interactive += Interactive;
+            InputReader.OnInteractue += Interactive;
         }
         else
         {
-            InputReader.interactive -= Interactive;
+            InputReader.OnInteractue -= Interactive;
         }
     }
 }
