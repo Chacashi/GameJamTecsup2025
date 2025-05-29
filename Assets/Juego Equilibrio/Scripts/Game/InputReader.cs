@@ -7,6 +7,8 @@ public class InputReader : MonoBehaviour
     public static event Action<Vector2> OnPlayerMovement;
 
     public static event Action<Vector2> OnMovementCamera;
+    public static event Action interactive;
+
 
     public void Movement(InputAction.CallbackContext context)
     {
