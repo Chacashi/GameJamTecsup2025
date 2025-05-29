@@ -1471,6 +1471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 354465471}
+  - component: {fileID: 354465472}
   m_Layer: 5
   m_Name: ChannelMusic
   m_TagString: Untagged
@@ -1501,6 +1502,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -311}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &354465472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354465470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d656307d5cf78a44ab6894dd7790b09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 2082435104}
+  volumeText: {fileID: 67317766}
+  audioSettingsData: {fileID: 11400000, guid: fa65bb8cd814f454f84c2541ff64eaef, type: 2}
 --- !u!1 &385359608
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,6 +2568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 750332618}
+  - component: {fileID: 750332619}
   m_Layer: 5
   m_Name: ChannelSFX
   m_TagString: Untagged
@@ -2582,6 +2599,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -587}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &750332619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750332617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d656307d5cf78a44ab6894dd7790b09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 457033695}
+  volumeText: {fileID: 837375349}
+  audioSettingsData: {fileID: 11400000, guid: c78e84d6d6943a24b9fb04b3a308c7cb, type: 2}
 --- !u!1 &759164691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,7 +2744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -2742,7 +2774,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 760649177}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 436488957}
+        m_TargetAssemblyTypeName: MasterManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &760649177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2790,6 +2834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 780702334}
+  - component: {fileID: 780702335}
   m_Layer: 5
   m_Name: ChannelMaster
   m_TagString: Untagged
@@ -2820,6 +2865,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &780702335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780702333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d656307d5cf78a44ab6894dd7790b09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1841401724}
+  volumeText: {fileID: 584402588}
+  audioSettingsData: {fileID: 11400000, guid: 27e840d8b272c5f47be616fe124b8379, type: 2}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5307,7 +5367,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27e840d8b272c5f47be616fe124b8379, type: 2}
   - {fileID: 11400000, guid: fa65bb8cd814f454f84c2541ff64eaef, type: 2}
   - {fileID: 11400000, guid: c78e84d6d6943a24b9fb04b3a308c7cb, type: 2}
-  audioClips: []
+  audioClips:
+  - {fileID: 8300000, guid: 67e2781a7359b094480960c63ee6bdf0, type: 3}
+  - {fileID: 8300000, guid: a9f4eabcf02f3724ca12d2ce7ce06273, type: 3}
   audioSourceMusic: {fileID: 1745758150}
   audioSourceSFX: {fileID: 1745758149}
 --- !u!4 &1745758152
