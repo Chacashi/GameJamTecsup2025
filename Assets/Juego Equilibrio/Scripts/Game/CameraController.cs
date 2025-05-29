@@ -13,8 +13,8 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] LayerMask objectLayer;
     private RaycastHit raycastObject;
-    private bool confirmsInput;
-
+    private bool confirmsInput = true;
+    InteractiveObject interactive;
     private void Awake()
     {
         camPlayer = GetComponent<CinemachineCamera>();
@@ -52,14 +52,18 @@ public class CameraController : MonoBehaviour
         {
             if (confirmsInput)
             {
-              
+                interactive = raycastObject.collider.gameObject.GetComponent<InteractiveObject>();
+                interactive.Input(true);
+                confirmsInput = false;
             }
         }
         else
         {
             if (!confirmsInput)
             {
-               
+                interactive.Input(false);
+                interactive = null;
+                confirmsInput = true;
             }
         }
     }
