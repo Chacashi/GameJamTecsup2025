@@ -4,50 +4,47 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Transform cameraTransform;
-    private Vector3 cameraForward;
-    private Vector3 cameraRight;
-    private Vector2 directionCamera;
-    private Vector2 direction;
-    private Rigidbody _compRigibody;
 
+    private Vector2 inputDirection;
+    private Rigidbody _rigidbody;
 
     private void Awake()
     {
-        _compRigibody= GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
+
     private void OnEnable()
     {
         InputReader.OnPlayerMovement += SetDirection;
-        InputReader.OnPlayerMovement += SetDirectionCamera;
     }
 
     private void OnDisable()
     {
         InputReader.OnPlayerMovement -= SetDirection;
-        InputReader.OnPlayerMovement -= SetDirectionCamera;
     }
 
-    void SetDirection( Vector2 newDirection)
+    private void SetDirection(Vector2 newDirection)
     {
-        direction = newDirection;
-    }
-
-    private void SetDirectionCamera(Vector2 newDirection)
-    {
-        directionCamera = newDirection;
+        inputDirection = newDirection;
     }
 
     private void FixedUpdate()
     {
-        cameraForward = cameraTransform.forward;
-        cameraRight = cameraTransform.right;
+        Vector3 camForward = cameraTransform.forward;
+        Vector3 camRight = cameraTransform.right;
 
-        cameraForward.y = 0f;
-        cameraRight.y = 0f;
-        cameraForward.Normalize();
-        cameraRight.Normalize();
+        camForward.y = 0;
+        camRight.y = 0;
+        camForward.Normalize();
+        camRight.Normalize();
 
-        _compRigibody.linearVelocity = new Vector3(speed * direction.x, _compRigibody.linearVelocity.y, speed * direction.y);
-        direction = cameraRight * directionCamera.x + cameraForward * directionCamera.y;
+        Vector3 moveDirection = camRight * inputDirection.x + camForward * inputDirection.y;
+
+        _rigidbody.linearVelocity = new Vector3(
+            moveDirection.x * speed,
+            _rigidbody.linearVelocity.y,
+            moveDirection.z * speed
+        );
     }
 }
+
