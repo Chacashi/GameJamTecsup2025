@@ -10,9 +10,6 @@ abstract public class Item : InteractiveObject
 
     protected Transform cameraMain;
 
-    static public event Action<GameObject, Sprite> eventInformation;
-    static public event Action<GameObject> eventRemove;
-
     public static event Action<Transform> OnEventSound;
     protected void Awake()
     {
@@ -23,14 +20,9 @@ abstract public class Item : InteractiveObject
         transform.SetParent(cameraMain);
         transform.localPosition = itemPosition;
         transform.localRotation = Quaternion.Euler(itemRotation);
-        eventInformation?.Invoke(this.gameObject, logo);
         input = true;
     }
-    protected virtual void ActiveEventRemove(GameObject go)
-    {
-        eventRemove?.Invoke(go);
-    }
-    protected void CollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
