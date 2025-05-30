@@ -3,13 +3,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MasterManager
 {
     [SerializeField] private Slider barTime;
     [SerializeField] private Image statePlayer;
     [SerializeField] private float maxValuePlayer;
     [SerializeField] private float valueNoise;
     [SerializeField] private Sprite[] arrayStatesPlayer;
+    [SerializeField] private CanvasGroup panelLose;
     public static event Action OnPlayerDeathd;
 
 
@@ -71,13 +72,45 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void PauseGame(CanvasGroup pausePanel)
+    {
+        if (pausePanel.alpha == 0)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            input.SwitchCurrentActionMap("Pause");
+            input.enabled = false;
+            Time.timeScale = 0;
+            FadeObject(pausePanel, 1f, durationFadePanel, () =>
+            {
+                pausePanel.interactable = true;
+                pausePanel.blocksRaycasts = true;
+                input.enabled = true;
+            });
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            input.SwitchCurrentActionMap("Game");
+            input.enabled = false;
+            FadeObject(pausePanel, 0f, durationFadePanel, () =>
+            {
+                pausePanel.interactable = false;
+                pausePanel.blocksRaycasts = false;
+                input.enabled = true;
+                Time.timeScale = 1;
+            });
+        }
+    }
 
 
 
 
 
-    
-    
+
+
+
 
 
 }
