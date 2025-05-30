@@ -11,6 +11,7 @@ public class UIManager : MasterManager
     [SerializeField] private float valueNoise;
     [SerializeField] private Sprite[] arrayStatesPlayer;
     [SerializeField] private CanvasGroup panelLose;
+    [SerializeField] private CanvasGroup panelPause;
     public static event Action OnPlayerDeathd;
 
 
@@ -28,11 +29,13 @@ public class UIManager : MasterManager
     private void OnEnable()
     {
         InputReader.OnChangeBarTime += IncrementBarTime;
+        InputReader.OnstopGame += DoPause;
     }
 
     private void OnDisable()
     {
         InputReader.OnChangeBarTime -= IncrementBarTime;
+        InputReader.OnstopGame -= DoPause;
     }
     void IncrementBarTime()
     {
@@ -102,6 +105,11 @@ public class UIManager : MasterManager
                 Time.timeScale = 1;
             });
         }
+    }
+
+    private void DoPause()
+    {
+        PauseGame(panelPause);
     }
 
 
