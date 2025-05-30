@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,7 +21,7 @@ public class EnemyController : MonoBehaviour
     [Header("Characteristic")]
     [SerializeField] private OidoEnemy oidoEnemy;
     private float patrolTimer = 0f;
-
+    [SerializeField] private float listenRange;
     private void Reset()
     {
         patrolWaitTime = 2f;
@@ -30,6 +31,7 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -52,7 +54,6 @@ public class EnemyController : MonoBehaviour
             case StateEnemy.Atack:
                 break;
             case StateEnemy.IrDondeLabulla:
-                DirectionPoint();
                 break;
         }
     }
@@ -77,9 +78,6 @@ public class EnemyController : MonoBehaviour
     {
         currentPointIndex = (currentPointIndex + 1) % points.Length;
         Destination(points[currentPointIndex].position);
-    }
-    private void DirectionPoint()
-    {
     }
 
     private void Destination(Vector3 destination)
@@ -107,12 +105,21 @@ public class EnemyController : MonoBehaviour
             Gizmos.DrawSphere(points[i].position, 0.1f);
         }
     }
+    private void GetSoundPosition(Transform value)
+    {
+        if(Vector3.Distance(transform.position,value.position)< listenRange)
+        {
+            Destination(value.position);
+        }
+    }
     private void OnEnable()
     {
         oidoEnemy.OnCollisionEnter += Ir;
+        Item.OnEventSound += GetSoundPosition;
     }
     private void OnDisable()
     {
         oidoEnemy.OnCollisionEnter -= Ir;
+        Item.OnEventSound -= GetSoundPosition;
     }
 }

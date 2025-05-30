@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        barTime.value 
+        //barTime.value 
     }
     private void OnEnable()
     {
