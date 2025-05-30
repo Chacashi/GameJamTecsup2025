@@ -11,7 +11,6 @@ public class LaunchObject : Item
     private bool shoot;
 
     private LineRenderer lineRenderer;
-
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -36,12 +35,11 @@ public class LaunchObject : Item
             {
                 if (launchModifier > minDistance)
                 {
-                    GameObject proyectile = Instantiate(proyectilePrefab, transform.position, Quaternion.identity);
-                    Rigidbody rb = proyectile.GetComponent<Rigidbody>();
+                    rb.isKinematic = false;
                     rb.linearVelocity = cameraMain.forward.normalized * launchModifier;
-
                     launchModifier = 0;
-                    Destroy(this.gameObject);
+                    transform.SetParent(null);
+                    collider.enabled = true;
                 }
                 lineRenderer.enabled = false;
             }
