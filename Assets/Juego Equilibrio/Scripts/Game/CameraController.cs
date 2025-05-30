@@ -5,7 +5,6 @@ public class CameraController : MonoBehaviour
 {
     private Vector2 movementCamera;
     [SerializeField] private float velocity;
-    private CinemachineCamera camPlayer;
     [SerializeField] private Transform camPrincipal;
 
     [SerializeField] private float minVerticalAngle = -80f;
@@ -15,10 +14,6 @@ public class CameraController : MonoBehaviour
     private RaycastHit raycastObject;
     private bool confirmsInput = true;
     InteractiveObject interactive;
-    private void Awake()
-    {
-        camPlayer = GetComponent<CinemachineCamera>();
-    }
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
