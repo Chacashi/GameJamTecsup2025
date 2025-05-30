@@ -814,6 +814,30 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c1ab2a22-d63e-486d-b2dc-f267426001ec
     m_ActionName: 'Game/BarraTiempo[/Keyboard/ctrl]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5305bc49-02dc-4983-b462-baa0b99c5e52
+    m_ActionName: 'Game/Left Click[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 919684454}
+        m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
+        m_MethodName: PressEsc
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8464334f-b3e0-45d9-b493-537e8745bfb4
+    m_ActionName: 'Game/StopGame[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9542e244-a5ec-4e86-9c34-79a6b77e77e6
+    m_ActionName: 'Pause/StopGame[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Game

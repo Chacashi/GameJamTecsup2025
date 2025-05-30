@@ -77,6 +77,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "StopGame",
+                    "type": "Button",
+                    "id": "8464334f-b3e0-45d9-b493-537e8745bfb4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -176,6 +185,45 @@
                     "processors": "",
                     "groups": "",
                     "action": "Left Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6e08649-6240-46b7-ad4d-fb4bf5b01856",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pause",
+            "id": "f0a44445-4725-44bd-a3ad-278911d4699b",
+            "actions": [
+                {
+                    "name": "StopGame",
+                    "type": "Button",
+                    "id": "9542e244-a5ec-4e86-9c34-79a6b77e77e6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "19f61db5-272d-4397-86ae-3abcf865aef5",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
