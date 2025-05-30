@@ -12,6 +12,8 @@ abstract public class Item : InteractiveObject
 
     static public event Action<GameObject, Sprite> eventInformation;
     static public event Action<GameObject> eventRemove;
+
+    public static event Action<Transform> OnEventSound;
     protected void Awake()
     {
         cameraMain = Camera.main.transform;
@@ -27,5 +29,12 @@ abstract public class Item : InteractiveObject
     protected virtual void ActiveEventRemove(GameObject go)
     {
         eventRemove?.Invoke(go);
+    }
+    protected void CollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            OnEventSound?.Invoke(this.transform);
+        }
     }
 }
