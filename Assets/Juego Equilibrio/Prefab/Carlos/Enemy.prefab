@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 91bc951f368fa424b844cbd0c8989b3e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.333041
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 91bc951f368fa424b844cbd0c8989b3e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.333041
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 91bc951f368fa424b844cbd0c8989b3e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.333041
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 91bc951f368fa424b844cbd0c8989b3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9561334
       objectReference: {fileID: 0}
@@ -172,6 +184,7 @@ MonoBehaviour:
   patrolWaitTime: 2
   arriveDistance: 0.5
   oidoEnemy: {fileID: 2613822035682146050}
+  listenRange: 0
 --- !u!1 &4318231861262394900 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: 91bc951f368fa424b844cbd0c8989b3e, type: 3}
