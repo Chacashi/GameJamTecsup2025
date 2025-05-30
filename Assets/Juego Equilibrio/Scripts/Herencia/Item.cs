@@ -1,36 +1,37 @@
 using System;
 using UnityEngine;
-
+[RequireComponent(typeof(Rigidbody))]
 abstract public class Item : InteractiveObject
 {
     [Header("Item")]
     [SerializeField] protected Vector3 itemPosition;
     [SerializeField] protected Vector3 itemRotation;
     [SerializeField] protected Sprite logo;
-
+    protected Rigidbody rb;
     protected Transform cameraMain;
+    protected Collider collider;
 
-    static public event Action<GameObject, Sprite> eventInformation;
-    static public event Action<GameObject> eventRemove;
+    [Header("Target")]
+    [SerializeField] protected Transform target;
+
 
     public static event Action<Transform> OnEventSound;
     protected void Awake()
     {
         cameraMain = Camera.main.transform;
+        rb = GetComponent<Rigidbody>();
+        collider = GetComponent<Collider>();
     }
     protected override void Interactive()
     {
-        transform.SetParent(cameraMain);
+        transform.SetParent(target);
         transform.localPosition = itemPosition;
         transform.localRotation = Quaternion.Euler(itemRotation);
-        eventInformation?.Invoke(this.gameObject, logo);
         input = true;
+        collider.enabled = false;
+        rb.isKinematic = true;
     }
-    protected virtual void ActiveEventRemove(GameObject go)
-    {
-        eventRemove?.Invoke(go);
-    }
-    protected void CollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {

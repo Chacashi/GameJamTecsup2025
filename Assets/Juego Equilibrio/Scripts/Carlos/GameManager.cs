@@ -1,22 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
     [SerializeField] private Transform[] positionRamdom;
     [SerializeField] private Transform[] objetos;
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    [SerializeField] private CanvasGroup panelLose;
+
     private void Start()
     {
         RandomPosition();
@@ -54,9 +45,11 @@ public class GameManager : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        for(int i = 0; i < positionRamdom.Length; i++)
+        for (int i = 0; i < positionRamdom.Length; i++)
         {
             Gizmos.DrawSphere(positionRamdom[i].position, 0.1f);
         }
     }
+    
 }
+
