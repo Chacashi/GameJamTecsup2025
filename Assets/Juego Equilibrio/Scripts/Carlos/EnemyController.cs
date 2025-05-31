@@ -1,4 +1,4 @@
-using TMPro;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +18,8 @@ public class EnemyController : MonoBehaviour
     [Header("Patrol Settings")]
     [SerializeField] private float patrolWaitTime;
     [SerializeField] private float arriveDistance;
+    private bool isRotating = false;
+    private Quaternion targetRotation;
 
     [Header("Characteristic")]
     [SerializeField] private float radioRamdom;
@@ -25,6 +27,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float listenRange;
 
     private Vector3 center2;
+
 
     private void Reset()
     {
@@ -63,7 +66,6 @@ public class EnemyController : MonoBehaviour
                 break;
         }
     }
-
     private void Patrol()
     {
         if (points.Length == 0) return;
@@ -75,10 +77,46 @@ public class EnemyController : MonoBehaviour
             if (patrolTimer >= patrolWaitTime)
             {
                 patrolTimer = 0f;
-                Destination(GetRandomPoint(transform.position, radioRamdom));
+                Vector3 nextPoint = GetRandomPoint(transform.position, radioRamdom);
+                StartCoroutine(RotateThenMove(nextPoint));
             }
         }
     }
+    private IEnumerator RotateThenMove(Vector3 destination)
+    {
+        isRotating = true;
+        agent.isStopped = true;
+
+        Vector3 direction = (destination - transform.position).normalized;
+        targetRotation = Quaternion.LookRotation(direction);
+
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 1f)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
+            yield return null;
+        }
+
+        transform.rotation = targetRotation; 
+
+        isRotating = false;
+        agent.isStopped = false;
+        Destination(destination);
+    }
+    //private void Patrol()
+    //{
+    //    if (points.Length == 0) return;
+
+    //    if (!agent.pathPending && agent.remainingDistance <= arriveDistance)
+    //    {
+    //        patrolTimer += Time.deltaTime;
+
+    //        if (patrolTimer >= patrolWaitTime)
+    //        {
+    //            patrolTimer = 0f;
+    //            Destination(GetRandomPoint(transform.position, radioRamdom));
+    //        }
+    //    }
+    //}
 
     private void GoToNextPoint()
     {
@@ -121,11 +159,11 @@ public class EnemyController : MonoBehaviour
         Destination(position);
     }
 
-    private void GetSoundPosition(Transform value)
+    private void GetSoundPosition(Vector3 position,float distance)
     {
-        if (Vector3.Distance(transform.position, value.position) < listenRange)
+        if (Vector3.Distance(transform.position, position) < distance)
         {
-            Destination(value.position);
+            Destination(position);
         }
     }
 
@@ -156,12 +194,14 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
-        Item.OnEventSound += GetSoundPosition;
+        //Item.OnEventSound += GetSoundPosition;
+        PlayerController.OnEventSound += GetSoundPosition;
     }
 
     private void OnDisable()
     {
-        Item.OnEventSound -= GetSoundPosition;
+        //Item.OnEventSound -= GetSoundPosition;
+        PlayerController.OnEventSound += GetSoundPosition;
     }
     private enum StateEnemy
     {

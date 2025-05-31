@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +11,8 @@ public class UIManager : MasterManager
     [SerializeField] private Sprite[] arrayStatesPlayer;
     [SerializeField] private CanvasGroup panelLose;
     [SerializeField] private CanvasGroup panelPause;
-    public static event Action OnPlayerDeathd;
 
-
+    public Slider BarTime => barTime;
     private void Start()
     {
         barTime.minValue = 0;
@@ -46,7 +44,7 @@ public class UIManager : MasterManager
     {
         if (value <= 0)
         {
-            OnPlayerDeathd?.Invoke();
+            GameManager.instance.Fail();
         }
         else if(value<5 && value > 0)
         {
@@ -62,7 +60,7 @@ public class UIManager : MasterManager
         }
         else
         {
-            OnPlayerDeathd?.Invoke();
+            GameManager.instance.Fail();
         }
 
     }

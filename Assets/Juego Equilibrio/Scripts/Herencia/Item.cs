@@ -14,8 +14,13 @@ abstract public class Item : InteractiveObject
     [Header("Target")]
     [SerializeField] protected Transform target;
 
-
-    public static event Action<Transform> OnEventSound;
+    [Header("Event Sound")]
+    [SerializeField] private float distanceSound;
+    public static event Action<Vector3, float> OnEventSound;
+    private void Reset()
+    {
+        distanceSound = 50;
+    }
     protected void Awake()
     {
         cameraMain = Camera.main.transform;
@@ -38,7 +43,7 @@ abstract public class Item : InteractiveObject
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-            OnEventSound?.Invoke(this.transform);
+            OnEventSound?.Invoke(this.transform.position,distanceSound);
             Debug.Log("Entro");
         }
     }

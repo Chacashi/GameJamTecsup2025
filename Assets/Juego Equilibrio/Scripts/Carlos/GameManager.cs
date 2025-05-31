@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
             Instantiate(prefabPiezaRompecabeza, spawnPoint.position, Quaternion.identity);
         }
     }
+
     private void RandomPosition()
     {
         if (positionRamdom.Length < objetos.Length)
@@ -67,6 +68,8 @@ public class GameManager : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
+        if(positionRamdom!=null) return;
+
         Gizmos.color = Color.green;
         for (int i = 0; i < positionRamdom.Length; i++)
         {

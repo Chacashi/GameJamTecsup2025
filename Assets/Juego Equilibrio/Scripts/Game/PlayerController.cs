@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,7 +8,13 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 inputDirection;
     private Rigidbody _rigidbody;
-
+    [Header("Event Sound")]
+    [SerializeField] private float distanceSound;
+    public static event Action<Vector3, float> OnEventSound;
+    private void Reset()
+    {
+        distanceSound = 100;
+    }
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -25,6 +32,10 @@ public class PlayerController : MonoBehaviour
 
     private void SetDirection(Vector2 newDirection)
     {
+        if (newDirection != Vector2.zero)
+        {
+            OnEventSound?.Invoke(transform.position, distanceSound);
+        }
         inputDirection = newDirection;
     }
 
