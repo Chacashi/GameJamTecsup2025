@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,11 @@ public class UIManager : MasterManager
     [SerializeField] private Sprite[] arrayStatesPlayer;
     [SerializeField] private CanvasGroup panelLose;
     [SerializeField] private CanvasGroup panelPause;
+    [SerializeField] private TMP_Text textCountPieces;
+    [SerializeField] private float numPieces = 0;
+
+    public static event Action OnPiecePuzzleComplete;
+
 
     private AudioSource soundSilvido;
     public Slider BarTime => barTime;
@@ -28,6 +34,7 @@ public class UIManager : MasterManager
 
     private void Start()
     {
+        textCountPieces.text = "00/06";
         barTime.minValue = 0;
         barTime.maxValue = maxValuePlayer;
         barTime.value = maxValuePlayer / 2;
@@ -147,4 +154,18 @@ public class UIManager : MasterManager
     {
         PauseGame(panelPause);
     }
+
+
+    private void IncrementPieceCount()
+    {
+        numPieces++;
+        if (numPieces >= 6)
+        {
+            textCountPieces.text = numPieces.ToString("00") + "/06";
+            OnPiecePuzzleComplete?.Invoke();
+        }
+    }
+
+
+
 }
