@@ -161,8 +161,8 @@ MonoBehaviour:
   cameraTransform: {fileID: 1312104933744083800}
   distanceSound: 0
   manager: {fileID: 0}
-  speedMin: 0
-  speedMax: 0
+  speedMin: 5
+  speedMax: 10
 --- !u!54 &4352613734229745621
 Rigidbody:
   m_ObjectHideFlags: 0
