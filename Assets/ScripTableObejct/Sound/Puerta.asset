@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35c10f7bff718242a9853b959afab7e, type: 3}
   m_Name: Puerta
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: a4d9434f9b2f1a9448cc2968aa2fbb57, type: 3}
   audioMixerGroup: {fileID: -1730948557950453888, guid: d56ae745b12670444a18fb1a9d5900a3, type: 2}
