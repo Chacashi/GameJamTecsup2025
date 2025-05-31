@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField] private Transform[] positionRamdom;
-    [SerializeField] private Transform[] objetos;
+    [SerializeField] private GameObject[] objetos;
     [SerializeField] private CanvasGroup panelLose;
 
     [Header("RompeCabezas")]
@@ -56,14 +56,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < objetos.Length; i++)
         {
-            if (i < posicionesMezcladas.Length)
-            {
-                objetos[i].position = posicionesMezcladas[i].position;
-            }
-            else
-            {
-                objetos[i].position = posicionesMezcladas[i % posicionesMezcladas.Length].position;
-            }
+            Instantiate(objetos[i], posicionesMezcladas[i].position, posicionesMezcladas[i].rotation);
         }
     }
     private void OnDrawGizmos()

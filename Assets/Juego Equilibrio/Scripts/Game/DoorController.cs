@@ -1,7 +1,7 @@
 using UnityEngine;
 public class DoorController : InteractiveObject
 {
-    //[SerializeField] private AudioClipSO audioDoor;
+    [SerializeField] private AudioClipSO audioDoor;
 
     [Header("Rotation")]
     [SerializeField] private Vector3 rotationOpen;
@@ -30,6 +30,7 @@ public class DoorController : InteractiveObject
     }
     protected override void Interactive()
     {
+        audioDoor.PlayOneShoot();
         if (!input)
         {
             input = true;
