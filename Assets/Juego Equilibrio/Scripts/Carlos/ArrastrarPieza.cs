@@ -96,6 +96,5 @@ public class ArrastrarPieza : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         {
             posicionInicial = position;
         }
-        Debug.Log(Vector2.Distance(rectTransform.position, posicionObjetivo.position));
     }
 }

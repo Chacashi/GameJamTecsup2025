@@ -1,8 +1,13 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PlayerController : MonoBehaviour
 {
+    private AudioSource playerAudio;
+    private bool isWalking = false;
+
     [SerializeField] private float speed;
     [SerializeField] private Transform cameraTransform;
 
@@ -22,13 +27,15 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        playerAudio = GetComponent<AudioSource>();
     }
     private void Update()
     {
-        float normalizedValue = manager.BarTime.value / manager.BarTime.maxValue; 
-                                                                                 
+        float normalizedValue = manager.BarTime.value / manager.BarTime.maxValue;
         float invertedValue = 1f - normalizedValue;
-        speed = Mathf.Lerp(speedMin, speedMax, invertedValue);
+        float velocidadFactor = 1f - Mathf.Pow(invertedValue * 2f - 1f, 2f); 
+        speed = Mathf.Lerp(speedMin, speedMax, velocidadFactor);
+        HandleMovementSound();
     }
     private void OnEnable()
     {
@@ -39,7 +46,24 @@ public class PlayerController : MonoBehaviour
     {
         InputReader.OnPlayerMovement -= SetDirection;
     }
-
+    private void HandleMovementSound()
+    {
+        if (inputDirection != Vector2.zero)
+        {
+            if (!playerAudio.isPlaying)
+            {
+                playerAudio.Play();
+            }
+        }
+        else
+        {
+            if (playerAudio.isPlaying)
+            {
+                playerAudio.Stop();
+            }
+        }
+    }
+    
     private void SetDirection(Vector2 newDirection)
     {
         if (newDirection != Vector2.zero)
@@ -72,6 +96,13 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
             GameManager.instance.Fail();
+            Debug.Log("Entro");
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
             Debug.Log("Entro");
         }
     }

@@ -12,7 +12,12 @@ public class UIManager : MasterManager
     [SerializeField] private CanvasGroup panelLose;
     [SerializeField] private CanvasGroup panelPause;
 
+    private AudioSource soundSilvido;
     public Slider BarTime => barTime;
+    private void Awake()
+    {
+        soundSilvido = GetComponent<AudioSource>();
+    }
     private void Start()
     {
         barTime.minValue = 0;
@@ -37,7 +42,8 @@ public class UIManager : MasterManager
     }
     void IncrementBarTime()
     {
-        barTime.value +=valueNoise; 
+        barTime.value +=valueNoise;
+        soundSilvido.Play();
     }
 
     private void CalculateStatePlayer( float value)
