@@ -1,12 +1,9 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class PlayerController : MonoBehaviour
 {
     private AudioSource playerAudio;
-    private bool isWalking = false;
 
     [SerializeField] private float speed;
     [SerializeField] private Transform cameraTransform;

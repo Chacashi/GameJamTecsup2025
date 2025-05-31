@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,21 +15,30 @@ public class UIManager : MasterManager
 
     private AudioSource soundSilvido;
     public Slider BarTime => barTime;
+
+    [Header("Silbido Config")]
+    [SerializeField] private float silbidoFadeDelay = 3f;
+
+    private Coroutine stopSilbidoCoroutine;
+
     private void Awake()
     {
         soundSilvido = GetComponent<AudioSource>();
     }
+
     private void Start()
     {
         barTime.minValue = 0;
         barTime.maxValue = maxValuePlayer;
-        barTime.value = maxValuePlayer/2;
+        barTime.value = maxValuePlayer / 2;
     }
+
     private void Update()
     {
         SubstractValue();
         CalculateStatePlayer(barTime.value);
     }
+
     private void OnEnable()
     {
         InputReader.OnChangeBarTime += IncrementBarTime;
@@ -40,35 +50,21 @@ public class UIManager : MasterManager
         InputReader.OnChangeBarTime -= IncrementBarTime;
         InputReader.OnstopGame -= DoPause;
     }
+
     void IncrementBarTime()
     {
-        barTime.value +=valueNoise;
-        soundSilvido.Play();
-    }
+        barTime.value += valueNoise;
 
-    private void CalculateStatePlayer( float value)
-    {
-        if (value <= 0)
+        if (!soundSilvido.isPlaying)
         {
-            GameManager.instance.Fail();
-        }
-        else if(value<5 && value > 0)
-        {
-            statePlayer.sprite = arrayStatesPlayer[0];
-        }
-        else if(value>=5 && value < 12)
-        {
-            statePlayer.sprite = arrayStatesPlayer[1];
-        }
-        else if(value>=12 && value < 20)
-        {
-            statePlayer.sprite = arrayStatesPlayer[2];
-        }
-        else
-        {
-            GameManager.instance.Fail();
+            soundSilvido.Play();
         }
 
+        if (stopSilbidoCoroutine != null)
+        {
+            StopCoroutine(stopSilbidoCoroutine);
+            stopSilbidoCoroutine = null;
+        }
     }
 
     void SubstractValue()
@@ -76,6 +72,42 @@ public class UIManager : MasterManager
         if (barTime.value > barTime.minValue)
         {
             barTime.value -= Time.deltaTime;
+
+            if (soundSilvido.isPlaying && stopSilbidoCoroutine == null)
+            {
+                stopSilbidoCoroutine = StartCoroutine(StopSilbidoAfterDelay());
+            }
+        }
+    }
+
+    private IEnumerator StopSilbidoAfterDelay()
+    {
+        yield return new WaitForSeconds(silbidoFadeDelay);
+        soundSilvido.Stop();
+        stopSilbidoCoroutine = null;
+    }
+
+    private void CalculateStatePlayer(float value)
+    {
+        if (value <= 0)
+        {
+            GameManager.instance.Fail();
+        }
+        else if (value < 5 && value > 0)
+        {
+            statePlayer.sprite = arrayStatesPlayer[0];
+        }
+        else if (value >= 5 && value < 12)
+        {
+            statePlayer.sprite = arrayStatesPlayer[1];
+        }
+        else if (value >= 12 && value < 20)
+        {
+            statePlayer.sprite = arrayStatesPlayer[2];
+        }
+        else
+        {
+            GameManager.instance.Fail();
         }
     }
 
@@ -115,14 +147,4 @@ public class UIManager : MasterManager
     {
         PauseGame(panelPause);
     }
-
-
-
-
-
-
-
-
-
-
 }
