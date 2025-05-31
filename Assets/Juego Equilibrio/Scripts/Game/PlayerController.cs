@@ -23,11 +23,15 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake()
     {
+
         _rigidbody = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
     }
     private void Update()
     {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        inputDirection = new Vector2(horizontal, vertical);
         float normalizedValue = manager.BarTime.value / manager.BarTime.maxValue;
         float invertedValue = 1f - normalizedValue;
         float velocidadFactor = 1f - Mathf.Pow(invertedValue * 2f - 1f, 2f); 
