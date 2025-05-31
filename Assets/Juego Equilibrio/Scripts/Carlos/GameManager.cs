@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform[] positionRamdom;
     [SerializeField] private Transform[] objetos;
     [SerializeField] private CanvasGroup panelLose;
+
+    [Header("RompeCabezas")]
+    [SerializeField] private int piezas;
+    [SerializeField] private Transform[] positionRompecabeza;
+    [SerializeField] private GameManager prefabPiezaRompecabeza;
     private void Awake()
     {
         if (instance == null)
@@ -20,6 +25,15 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         RandomPosition();
+    }
+    private void DrawRompecabezas()
+    {
+        for (int i = 0; i < piezas; i++)
+        {
+            int randomIndex = Random.Range(0, positionRompecabeza.Length);
+            Transform spawnPoint = positionRompecabeza[randomIndex];
+            Instantiate(prefabPiezaRompecabeza, spawnPoint.position, Quaternion.identity);
+        }
     }
     private void RandomPosition()
     {
@@ -63,6 +77,9 @@ public class GameManager : MonoBehaviour
     {
         
     }
-    
+    public void CheckRompeCabezas()
+    {
+
+    }
 }
 
