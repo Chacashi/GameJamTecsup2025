@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < objetos.Length; i++)
         {
-            Instantiate(objetos[i], posicionesMezcladas[i].position, posicionesMezcladas[i].rotation);
+            Instantiate(objetos[i], posicionesMezcladas[i].position,Quaternion.Euler(-90,0,0));
         }
     }
     private void OnDrawGizmos()
