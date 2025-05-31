@@ -24,7 +24,7 @@ public class AudioSlider : MonoBehaviour
         float savedVolume = PlayerPrefs.GetFloat(audioSettingsData.Key, 0.5f);
         audioSettingsData.UpdateVolume(savedVolume);
         slider.value = savedVolume;
-        volumeText.text = (savedVolume * 100).ToString("000");
+        volumeText.text = (savedVolume * 100).ToString("00");
     }
 
     private void OnDisable()
@@ -36,7 +36,7 @@ public class AudioSlider : MonoBehaviour
 
     public void UpdateText(float value)
     {
-        volumeText.text = (value * 100).ToString("000");
+        volumeText.text = (value * 100).ToString("00");
         slider.value = value;
         if (value == 1)
         {
