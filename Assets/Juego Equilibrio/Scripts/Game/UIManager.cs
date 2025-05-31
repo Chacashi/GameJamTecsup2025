@@ -159,10 +159,12 @@ public class UIManager : MasterManager
     public void IncrementPieceCount()
     {
         numPieces++;
+        textCountPieces.text = numPieces.ToString("00") + "/06";
         if (numPieces >= 6)
         {
             textCountPieces.text = numPieces.ToString("00") + "/06";
             OnPiecePuzzleComplete?.Invoke();
+            GameManager.instance.Win();
         }
     }
 
