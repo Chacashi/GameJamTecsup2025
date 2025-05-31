@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     [Header("Event Sound")]
     [SerializeField] private float distanceSound;
     public static event Action<Vector3, float> OnEventSound;
+    [Header("UIManager")]
+    [SerializeField] private UIManager manager;
+    [SerializeField] private float speedMin;
+    [SerializeField] private float speedMax;
     private void Reset()
     {
         distanceSound = 100;
@@ -19,7 +23,13 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
-
+    private void Update()
+    {
+        float normalizedValue = manager.BarTime.value / manager.BarTime.maxValue; 
+                                                                                 
+        float invertedValue = 1f - normalizedValue;
+        speed = Mathf.Lerp(speedMin, speedMax, invertedValue);
+    }
     private void OnEnable()
     {
         InputReader.OnPlayerMovement += SetDirection;

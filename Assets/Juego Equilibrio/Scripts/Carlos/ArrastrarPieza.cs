@@ -6,23 +6,29 @@ public class ArrastrarPieza : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     private RectTransform rectTransform;
     private Canvas canvas;
     private CanvasGroup canvasGroup;
-    private Vector2 posicionInicial;
+    private Vector3 posicionInicial;
 
     private Vector2 posicionClick;
     private bool arrastrando = false;
     [SerializeField] private float umbralClick = 10f;
 
-    public RectTransform posicionObjetivo;    
+    public RectTransform posicionObjetivo;
     public float rotacionObjetivo = 0f;
 
-    [SerializeField] private float umbralPosicion = 20f; 
+    [SerializeField] private float umbralPosicion = 20f;
     [SerializeField] private float umbralRotacion = 5f;
+
+    [Header("Positions")]
+    [SerializeField] private Vector3 position;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponentInParent<CanvasGroup>();
         canvas = GetComponentInParent<Canvas>();
-        posicionInicial = rectTransform.anchoredPosition;
+
+        position = rectTransform.position; // Posición original de la pieza
+        posicionInicial = position;        // La inicial también es la original al inicio
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -30,15 +36,16 @@ public class ArrastrarPieza : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         posicionClick = eventData.position;
         arrastrando = false;
     }
+
     public bool EstaEnPosicionCorrecta()
     {
-        float distancia = Vector2.Distance(rectTransform.anchoredPosition, posicionObjetivo.anchoredPosition);
-
+        float distancia = Vector2.Distance(rectTransform.position, posicionObjetivo.position);
         float anguloActual = rectTransform.eulerAngles.z;
         float diferenciaRotacion = Mathf.Abs(Mathf.DeltaAngle(anguloActual, rotacionObjetivo));
 
         return distancia <= umbralPosicion && diferenciaRotacion <= umbralRotacion;
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         arrastrando = true;
@@ -48,7 +55,7 @@ public class ArrastrarPieza : MonoBehaviour, IPointerDownHandler, IBeginDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        rectTransform.position += (Vector3)(eventData.delta / canvas.scaleFactor);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -58,17 +65,15 @@ public class ArrastrarPieza : MonoBehaviour, IPointerDownHandler, IBeginDragHand
 
         if (EstaEnPosicionCorrecta())
         {
-            rectTransform.anchoredPosition = posicionObjetivo.anchoredPosition;
+            rectTransform.position = posicionObjetivo.position;
             rectTransform.eulerAngles = new Vector3(0, 0, rotacionObjetivo);
             canvasGroup.blocksRaycasts = false;
-
-            posicionInicial = rectTransform.anchoredPosition;
 
             PuzzleManager.Instance.PiezaColocadaCorrectamente(this);
         }
         else
         {
-            rectTransform.anchoredPosition = posicionInicial;
+            rectTransform.position = posicionInicial;
         }
     }
 
@@ -82,5 +87,15 @@ public class ArrastrarPieza : MonoBehaviour, IPointerDownHandler, IBeginDragHand
                 rectTransform.Rotate(0f, 0f, 90f);
             }
         }
+
+        if (Vector2.Distance(rectTransform.position, posicionObjetivo.position) < 40f)
+        {
+            posicionInicial = posicionObjetivo.position;
+        }
+        else
+        {
+            posicionInicial = position;
+        }
+        Debug.Log(Vector2.Distance(rectTransform.position, posicionObjetivo.position));
     }
 }
