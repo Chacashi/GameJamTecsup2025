@@ -156,7 +156,7 @@ public class UIManager : MasterManager
     }
 
 
-    private void IncrementPieceCount()
+    public void IncrementPieceCount()
     {
         numPieces++;
         if (numPieces >= 6)

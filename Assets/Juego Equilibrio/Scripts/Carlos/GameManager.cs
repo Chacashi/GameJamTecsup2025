@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int piezas;
     [SerializeField] private Transform[] positionRompecabeza;
     [SerializeField] private GameManager prefabPiezaRompecabeza;
+    [SerializeField] private UIManager ui;
+
+    [SerializeField] private CanvasGroup canvas1;
+    [SerializeField] private CanvasGroup canvas2;
     private void Awake()
     {
         if (instance == null)
@@ -70,11 +74,21 @@ public class GameManager : MonoBehaviour
     }
     public void Fail()
     {
-        
+        ui.FadePanelIn(canvas1);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+    }
+    public void Win()
+    {
+        ui.FadePanelIn(canvas2);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
     }
     public void CheckRompeCabezas()
     {
-
+        ui.IncrementPieceCount();
     }
 }
 

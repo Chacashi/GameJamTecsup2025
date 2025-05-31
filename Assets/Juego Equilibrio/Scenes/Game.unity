@@ -7068,6 +7068,9 @@ MonoBehaviour:
   piezas: 0
   positionRompecabeza: []
   prefabPiezaRompecabeza: {fileID: 0}
+  ui: {fileID: 437835036}
+  canvas1: {fileID: 1513235710}
+  canvas2: {fileID: 1916619406}
 --- !u!4 &1275222556
 Transform:
   m_ObjectHideFlags: 0
@@ -25600,6 +25603,7 @@ MonoBehaviour:
   umbralPosicion: 10
   umbralRotacion: 5
   position: {x: 0, y: 0, z: 0}
+  estaColocada: 0
 --- !u!1 &2910384161982804967
 GameObject:
   m_ObjectHideFlags: 0
@@ -26148,6 +26152,7 @@ MonoBehaviour:
   umbralPosicion: 10
   umbralRotacion: 5
   position: {x: 0, y: 0, z: 0}
+  estaColocada: 0
 --- !u!1 &3000802041435783889
 GameObject:
   m_ObjectHideFlags: 0
@@ -28744,6 +28749,7 @@ MonoBehaviour:
   umbralPosicion: 10
   umbralRotacion: 5
   position: {x: 0, y: 0, z: 0}
+  estaColocada: 0
 --- !u!4 &3507548355813772895
 Transform:
   m_ObjectHideFlags: 0
@@ -35929,6 +35935,7 @@ MonoBehaviour:
   umbralPosicion: 10
   umbralRotacion: 5
   position: {x: 0, y: 0, z: 0}
+  estaColocada: 0
 --- !u!33 &5038409456757882006
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -46061,6 +46068,7 @@ MonoBehaviour:
   umbralPosicion: 10
   umbralRotacion: 5
   position: {x: 0, y: 0, z: 0}
+  estaColocada: 0
 --- !u!1 &6969680433706005201
 GameObject:
   m_ObjectHideFlags: 0
@@ -48816,6 +48824,7 @@ MonoBehaviour:
   umbralPosicion: 10
   umbralRotacion: 5
   position: {x: 0, y: 0, z: 0}
+  estaColocada: 0
 --- !u!4 &7508192164744275730
 Transform:
   m_ObjectHideFlags: 0
