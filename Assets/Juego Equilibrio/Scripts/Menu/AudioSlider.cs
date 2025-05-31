@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class AudioSlider : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
-    [SerializeField] private TMP_Text volumeText;
+    [SerializeField] protected Slider slider;
+    [SerializeField] protected TMP_Text volumeText;
     [SerializeField] private AudioSettings audioSettingsData;
     [Header("Sprites")]
-    [SerializeField] private Sprite[] sprites;
-    [SerializeField] private Image image;
+    [SerializeField] protected Sprite[] sprites;
+    [SerializeField] protected Image image;
 
     private void OnEnable()
     {
@@ -34,7 +34,7 @@ public class AudioSlider : MonoBehaviour
         slider.onValueChanged.RemoveListener(audioSettingsData.UpdateVolume);
     }
 
-    private void UpdateText(float value)
+    public void UpdateText(float value)
     {
         volumeText.text = (value * 100).ToString("000");
         slider.value = value;
