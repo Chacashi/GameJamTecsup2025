@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +10,9 @@ public class UIManager : MasterManager
     [SerializeField] private float valueNoise;
     [SerializeField] private Sprite[] arrayStatesPlayer;
     [SerializeField] private CanvasGroup panelLose;
-    public static event Action OnPlayerDeathd;
+    [SerializeField] private CanvasGroup panelPause;
 
-
+    public Slider BarTime => barTime;
     private void Start()
     {
         barTime.minValue = 0;
@@ -28,11 +27,13 @@ public class UIManager : MasterManager
     private void OnEnable()
     {
         InputReader.OnChangeBarTime += IncrementBarTime;
+        InputReader.OnstopGame += DoPause;
     }
 
     private void OnDisable()
     {
         InputReader.OnChangeBarTime -= IncrementBarTime;
+        InputReader.OnstopGame -= DoPause;
     }
     void IncrementBarTime()
     {
@@ -43,7 +44,7 @@ public class UIManager : MasterManager
     {
         if (value <= 0)
         {
-            OnPlayerDeathd?.Invoke();
+            GameManager.instance.Fail();
         }
         else if(value<5 && value > 0)
         {
@@ -59,7 +60,7 @@ public class UIManager : MasterManager
         }
         else
         {
-            OnPlayerDeathd?.Invoke();
+            GameManager.instance.Fail();
         }
 
     }
@@ -102,6 +103,11 @@ public class UIManager : MasterManager
                 Time.timeScale = 1;
             });
         }
+    }
+
+    private void DoPause()
+    {
+        PauseGame(panelPause);
     }
 
 

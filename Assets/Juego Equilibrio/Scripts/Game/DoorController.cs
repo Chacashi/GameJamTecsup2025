@@ -8,7 +8,10 @@ public class DoorController : InteractiveObject
     public Vector3 RotationOpen => rotationOpen;
     private Quaternion open;
     private Quaternion close;
-
+    public void OpenDoor()
+    {
+        input = true;
+    }
     private void Start()
     {
         open = Quaternion.Euler(rotationOpen);

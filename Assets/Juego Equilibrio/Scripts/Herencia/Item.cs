@@ -9,33 +9,42 @@ abstract public class Item : InteractiveObject
     [SerializeField] protected Sprite logo;
     protected Rigidbody rb;
     protected Transform cameraMain;
-    protected Collider collider;
+    protected Collider colision;
 
     [Header("Target")]
     [SerializeField] protected Transform target;
 
-
-    public static event Action<Transform> OnEventSound;
+    [Header("Event Sound")]
+    [SerializeField] private float distanceSound;
+    public static event Action<Vector3, float> OnEventSound;
+    private void Reset()
+    {
+        distanceSound = 50;
+    }
     protected void Awake()
     {
         cameraMain = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
+        colision = GetComponent<Collider>();
     }
     protected override void Interactive()
     {
-        transform.SetParent(target);
-        transform.localPosition = itemPosition;
-        transform.localRotation = Quaternion.Euler(itemRotation);
-        input = true;
-        collider.enabled = false;
-        rb.isKinematic = true;
+        if (target.childCount == 0)
+        {
+            transform.SetParent(target);
+            transform.localPosition = itemPosition;
+            transform.localRotation = Quaternion.Euler(itemRotation);
+            input = true;
+            colision.enabled = false;
+            rb.isKinematic = true;
+        }
     }
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-            OnEventSound?.Invoke(this.transform);
+            OnEventSound?.Invoke(this.transform.position,distanceSound);
+            Debug.Log("Entro");
         }
     }
 }

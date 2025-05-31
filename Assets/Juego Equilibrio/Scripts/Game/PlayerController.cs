@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,12 +8,28 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 inputDirection;
     private Rigidbody _rigidbody;
-
+    [Header("Event Sound")]
+    [SerializeField] private float distanceSound;
+    public static event Action<Vector3, float> OnEventSound;
+    [Header("UIManager")]
+    [SerializeField] private UIManager manager;
+    [SerializeField] private float speedMin;
+    [SerializeField] private float speedMax;
+    private void Reset()
+    {
+        distanceSound = 100;
+    }
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
-
+    private void Update()
+    {
+        float normalizedValue = manager.BarTime.value / manager.BarTime.maxValue; 
+                                                                                 
+        float invertedValue = 1f - normalizedValue;
+        speed = Mathf.Lerp(speedMin, speedMax, invertedValue);
+    }
     private void OnEnable()
     {
         InputReader.OnPlayerMovement += SetDirection;
@@ -25,6 +42,10 @@ public class PlayerController : MonoBehaviour
 
     private void SetDirection(Vector2 newDirection)
     {
+        if (newDirection != Vector2.zero)
+        {
+            OnEventSound?.Invoke(transform.position, distanceSound);
+        }
         inputDirection = newDirection;
     }
 
@@ -45,6 +66,14 @@ public class PlayerController : MonoBehaviour
             _rigidbody.linearVelocity.y,
             moveDirection.z * speed
         );
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Enemy"))
+        {
+            GameManager.instance.Fail();
+            Debug.Log("Entro");
+        }
     }
 }
 

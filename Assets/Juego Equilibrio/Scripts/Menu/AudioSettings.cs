@@ -6,7 +6,7 @@ public class AudioSettings : ScriptableObject
 {
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private string audioMixerKey;
-    [SerializeField] private string audioKeySafe;
+    [SerializeField] protected string audioKeySafe;
     [SerializeField, Range(0, 1)] private float volumeScaled = 1;
     [SerializeField, Range(-80, 20)] private float volumeDBs = 0;
     [SerializeField] private bool isMuted;
@@ -25,7 +25,7 @@ public class AudioSettings : ScriptableObject
         PlayerPrefs.DeleteKey(audioKeySafe);
     }
 
-    public void UpdateVolume(float value)
+    public virtual void UpdateVolume(float value)
     {
         volumeScaled = value;
 

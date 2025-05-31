@@ -1,9 +1,9 @@
 using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(BoxCollider))]
 public class LaunchObject : Item
 {
     [SerializeField] private float launchModifier;
-    [SerializeField] private GameObject proyectilePrefab;
     [SerializeField] private float maxDistance;
     [SerializeField] private float minDistance;
     [SerializeField] private int trajectoryPoints = 30;
@@ -39,7 +39,7 @@ public class LaunchObject : Item
                     rb.linearVelocity = cameraMain.forward.normalized * launchModifier;
                     launchModifier = 0;
                     transform.SetParent(null);
-                    collider.enabled = true;
+                    GetComponent<Collider>().enabled = true;
                 }
                 lineRenderer.enabled = false;
             }
