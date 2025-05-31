@@ -44,7 +44,6 @@ abstract public class Item : InteractiveObject
         if (collision.gameObject.CompareTag("Floor"))
         {
             OnEventSound?.Invoke(this.transform.position,distanceSound);
-            Debug.Log("Entro");
         }
     }
 }

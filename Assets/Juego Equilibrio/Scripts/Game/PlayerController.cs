@@ -100,6 +100,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            GameManager.instance.Fail();
             Debug.Log("Entro");
         }
     }

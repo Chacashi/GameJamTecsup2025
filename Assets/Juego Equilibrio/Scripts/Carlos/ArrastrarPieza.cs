@@ -20,6 +20,7 @@ public class ArrastrarPieza : MonoBehaviour, IPointerDownHandler, IBeginDragHand
 
     [Header("Positions")]
     [SerializeField] private Vector3 position;
+    public bool estaColocada = false;
 
     private void Awake()
     {

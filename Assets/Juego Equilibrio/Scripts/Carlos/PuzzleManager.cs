@@ -11,7 +11,7 @@ public class PuzzleManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -19,10 +19,15 @@ public class PuzzleManager : MonoBehaviour
 
     public void PiezaColocadaCorrectamente(ArrastrarPieza pieza)
     {
-        piezasColocadas++;
-        if (piezasColocadas >= piezas.Count)
+        if (!pieza.estaColocada)
         {
-            Debug.Log("¡Rompecabezas completado!");
+            pieza.estaColocada = true;
+            piezasColocadas++;
+
+            if (piezasColocadas >= piezas.Count)
+            {
+                Debug.Log("¡Rompecabezas completado!");
+            }
         }
     }
 }
