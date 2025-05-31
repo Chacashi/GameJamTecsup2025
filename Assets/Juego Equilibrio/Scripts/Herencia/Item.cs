@@ -9,7 +9,7 @@ abstract public class Item : InteractiveObject
     [SerializeField] protected Sprite logo;
     protected Rigidbody rb;
     protected Transform cameraMain;
-    protected Collider collider;
+    protected Collider colision;
 
     [Header("Target")]
     [SerializeField] protected Transform target;
@@ -20,22 +20,26 @@ abstract public class Item : InteractiveObject
     {
         cameraMain = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
+        colision = GetComponent<Collider>();
     }
     protected override void Interactive()
     {
-        transform.SetParent(target);
-        transform.localPosition = itemPosition;
-        transform.localRotation = Quaternion.Euler(itemRotation);
-        input = true;
-        collider.enabled = false;
-        rb.isKinematic = true;
+        if (target.childCount == 0)
+        {
+            transform.SetParent(target);
+            transform.localPosition = itemPosition;
+            transform.localRotation = Quaternion.Euler(itemRotation);
+            input = true;
+            colision.enabled = false;
+            rb.isKinematic = true;
+        }
     }
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
             OnEventSound?.Invoke(this.transform);
+            Debug.Log("Entro");
         }
     }
 }

@@ -1,13 +1,22 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     [SerializeField] private Transform[] positionRamdom;
     [SerializeField] private Transform[] objetos;
     [SerializeField] private CanvasGroup panelLose;
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(instance);
+        }
+    }
     private void Start()
     {
         RandomPosition();
@@ -49,6 +58,10 @@ public class GameManager : MonoBehaviour
         {
             Gizmos.DrawSphere(positionRamdom[i].position, 0.1f);
         }
+    }
+    public void Fail()
+    {
+        
     }
     
 }

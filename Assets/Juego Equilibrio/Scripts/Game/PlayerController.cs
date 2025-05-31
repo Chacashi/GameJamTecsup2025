@@ -46,5 +46,13 @@ public class PlayerController : MonoBehaviour
             moveDirection.z * speed
         );
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Enemy"))
+        {
+            GameManager.instance.Fail();
+            Debug.Log("Entro");
+        }
+    }
 }
 
