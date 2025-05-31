@@ -2317,6 +2317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 437835037}
   - component: {fileID: 437835036}
+  - component: {fileID: 437835038}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -2366,6 +2367,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &437835038
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437835035}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8171039554134314718, guid: d56ae745b12670444a18fb1a9d5900a3, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 46c1c1c928f6640439e0b4344bcc7cdb, type: 3}
+  m_Resource: {fileID: 8300000, guid: 46c1c1c928f6640439e0b4344bcc7cdb, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &470411733
 GameObject:
   m_ObjectHideFlags: 0
@@ -31068,6 +31166,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2264465973413338086, guid: 192cfcedfd9988c4e9790717b5b15959, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 8171039554134314718, guid: d56ae745b12670444a18fb1a9d5900a3, type: 2}
     - target: {fileID: 3000405897445550987, guid: 192cfcedfd9988c4e9790717b5b15959, type: 3}
       propertyPath: camPrincipal
       value: 
@@ -31094,7 +31196,7 @@ PrefabInstance:
       objectReference: {fileID: 437835036}
     - target: {fileID: 7411014153591969664, guid: 192cfcedfd9988c4e9790717b5b15959, type: 3}
       propertyPath: distanceSound
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -37020,7 +37122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 90, z: 0}
 --- !u!65 &5209257199750302990
 BoxCollider:
@@ -39142,7 +39244,8 @@ GameObject:
   - component: {fileID: 325695977048753309}
   - component: {fileID: 8241044648059108082}
   - component: {fileID: 361155632083243443}
-  m_Layer: 0
+  - component: {fileID: 8241044648059108083}
+  m_Layer: 6
   m_Name: puerta_27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46419,7 +46522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 90, z: 0}
 --- !u!65 &6991391458897302223
 BoxCollider:
@@ -47696,7 +47799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 0, z: 0}
 --- !u!65 &7222971589318641498
 BoxCollider:
@@ -48511,7 +48614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 90, z: 0}
 --- !u!65 &7334421191959728828
 BoxCollider:
@@ -49031,7 +49134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 90, z: 0}
 --- !u!65 &7494960145057369586
 BoxCollider:
@@ -51171,7 +51274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 90, z: 0}
 --- !u!65 &7959530240783569469
 BoxCollider:
@@ -51403,7 +51506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 90, z: 0}
 --- !u!65 &7992791089121342658
 BoxCollider:
@@ -52375,7 +52478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 90, z: 0}
 --- !u!65 &8198169867116245529
 BoxCollider:
@@ -52533,6 +52636,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5704973075339172529}
   m_Mesh: {fileID: -3087575311615345402, guid: ba6fa37b168f77245a7c65a72000bb09, type: 3}
+--- !u!114 &8241044648059108083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704973075339172529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
+  rotationOpen: {x: 0, y: 90, z: 0}
 --- !u!1 &8241638914872581511
 GameObject:
   m_ObjectHideFlags: 0
@@ -55549,7 +55666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 0, z: 0}
 --- !u!65 &8968625580130921469
 BoxCollider:
@@ -55999,7 +56116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 0, z: 0}
 --- !u!65 &9054887008496926582
 BoxCollider:
@@ -56345,7 +56462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 0, z: 0}
 --- !u!65 &9100149241008922465
 BoxCollider:
@@ -56444,7 +56561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a7f21998d47d84a9767e4ea85553db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDoor: {fileID: 0}
+  audioDoor: {fileID: 11400000, guid: e230f7533fa321b4085079cf7584d31e, type: 2}
   rotationOpen: {x: 0, y: 90, z: 0}
 --- !u!65 &9137663189102031548
 BoxCollider:
