@@ -68,7 +68,6 @@ public class GameManager : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        if(positionRamdom!=null) return;
 
         Gizmos.color = Color.green;
         for (int i = 0; i < positionRamdom.Length; i++)
