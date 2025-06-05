@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
 {
     private Vector2 movementCamera;
     [SerializeField] private float velocity;
-    [SerializeField] private Transform camPrincipal;
+    private Transform camPrincipal;
 
     [SerializeField] private float minVerticalAngle = -80f;
     [SerializeField] private float maxVerticalAngle = 80f;
@@ -14,6 +14,10 @@ public class CameraController : MonoBehaviour
     private RaycastHit raycastObject;
     private bool confirmsInput = true;
     InteractiveObject interactive;
+    private void Awake()
+    {
+        camPrincipal = Camera.main.transform;
+    }
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

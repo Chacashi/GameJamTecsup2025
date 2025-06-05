@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4545850638622594618}
   m_Layer: 0
   m_Name: Manito
-  m_TagString: Untagged
+  m_TagString: Manito
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,9 +406,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 10
-  camPrincipal: {fileID: 0}
   minVerticalAngle: -80
   maxVerticalAngle: 80
   objectLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64

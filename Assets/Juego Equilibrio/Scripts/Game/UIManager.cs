@@ -68,10 +68,9 @@ public class UIManager : MasterManager
         }
 
         if (stopSilbidoCoroutine != null)
-        {
-            StopCoroutine(stopSilbidoCoroutine);
-            stopSilbidoCoroutine = null;
-        }
+            return;
+
+        stopSilbidoCoroutine = StartCoroutine(StopSilbidoAfterDelay());
     }
 
     void SubstractValue()

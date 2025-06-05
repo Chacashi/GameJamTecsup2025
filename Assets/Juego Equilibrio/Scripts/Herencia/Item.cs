@@ -11,8 +11,7 @@ abstract public class Item : InteractiveObject
     protected Transform cameraMain;
     protected Collider colision;
 
-    [Header("Target")]
-    [SerializeField] protected Transform target;
+    protected static Transform target;
 
     [Header("Event Sound")]
     [SerializeField] private float distanceSound;
@@ -26,6 +25,10 @@ abstract public class Item : InteractiveObject
         cameraMain = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
         colision = GetComponent<Collider>();
+        if(target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Manito").transform;
+        }
     }
     protected override void Interactive()
     {
