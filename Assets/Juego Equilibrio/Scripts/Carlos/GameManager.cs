@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -11,6 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int piezas;
     [SerializeField] private Transform[] positionRompecabeza;
     [SerializeField] private GameManager prefabPiezaRompecabeza;
+
+    //Events
+    public static event Action<GameManager> OnDestroy;
     private void Awake()
     {
         if (instance == null)
@@ -30,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < piezas; i++)
         {
-            int randomIndex = Random.Range(0, positionRompecabeza.Length);
+            int randomIndex =  Random.Range(0, positionRompecabeza.Length);
             Transform spawnPoint = positionRompecabeza[randomIndex];
             Instantiate(prefabPiezaRompecabeza, spawnPoint.position, Quaternion.identity);
         }
