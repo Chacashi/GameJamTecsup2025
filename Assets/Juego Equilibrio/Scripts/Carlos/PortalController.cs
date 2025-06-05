@@ -9,6 +9,10 @@ public class PortalController : MonoBehaviour
     {
         doMove=GetComponent<DoMove>();
     }
+    private void Start()
+    {
+        PiecesCmplete();
+    }
     private void PiecesCmplete()
     {
         doMove.Go();
