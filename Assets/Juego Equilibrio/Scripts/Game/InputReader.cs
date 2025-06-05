@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+[RequireComponent(typeof(PlayerInput))]
 public class InputReader : MonoBehaviour
 {
     public static event Action<Vector2> OnPlayerMovement;
@@ -33,14 +33,11 @@ public class InputReader : MonoBehaviour
     }
     public void PressCtrl(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            OnChangeBarTime?.Invoke();
-        }
+        if (Time.timeScale == 0f || !context.performed) return;
+        OnChangeBarTime?.Invoke();
     }
     public void Shoot(InputAction.CallbackContext context)
     {
-        Debug.Log("a");
         if (context.started)
         {
             shoot?.Invoke();

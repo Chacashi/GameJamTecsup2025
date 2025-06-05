@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,19 +13,39 @@ public class UIManager : MasterManager
     [SerializeField] private Sprite[] arrayStatesPlayer;
     [SerializeField] private CanvasGroup panelLose;
     [SerializeField] private CanvasGroup panelPause;
+    [SerializeField] private TMP_Text textCountPieces;
+    [SerializeField] private float numPieces = 0;
 
+    public static event Action OnPiecePuzzleComplete;
+
+
+    private AudioSource soundSilvido;
     public Slider BarTime => barTime;
+
+    [Header("Silbido Config")]
+    [SerializeField] private float silbidoFadeDelay = 3f;
+
+    private Coroutine stopSilbidoCoroutine;
+
+    private void Awake()
+    {
+        soundSilvido = GetComponent<AudioSource>();
+    }
+
     private void Start()
     {
+        textCountPieces.text = "00/06";
         barTime.minValue = 0;
         barTime.maxValue = maxValuePlayer;
-        barTime.value = maxValuePlayer/2;
+        barTime.value = maxValuePlayer / 2;
     }
+
     private void Update()
     {
         SubstractValue();
         CalculateStatePlayer(barTime.value);
     }
+
     private void OnEnable()
     {
         InputReader.OnChangeBarTime += IncrementBarTime;
@@ -35,34 +57,20 @@ public class UIManager : MasterManager
         InputReader.OnChangeBarTime -= IncrementBarTime;
         InputReader.OnstopGame -= DoPause;
     }
+
     void IncrementBarTime()
     {
-        barTime.value +=valueNoise; 
-    }
+        barTime.value += valueNoise;
 
-    private void CalculateStatePlayer( float value)
-    {
-        if (value <= 0)
+        if (!soundSilvido.isPlaying)
         {
-            GameManager.instance.Fail();
-        }
-        else if(value<5 && value > 0)
-        {
-            statePlayer.sprite = arrayStatesPlayer[0];
-        }
-        else if(value>=5 && value < 12)
-        {
-            statePlayer.sprite = arrayStatesPlayer[1];
-        }
-        else if(value>=12 && value < 20)
-        {
-            statePlayer.sprite = arrayStatesPlayer[2];
-        }
-        else
-        {
-            GameManager.instance.Fail();
+            soundSilvido.Play();
         }
 
+        if (stopSilbidoCoroutine != null)
+            return;
+
+        stopSilbidoCoroutine = StartCoroutine(StopSilbidoAfterDelay());
     }
 
     void SubstractValue()
@@ -70,6 +78,42 @@ public class UIManager : MasterManager
         if (barTime.value > barTime.minValue)
         {
             barTime.value -= Time.deltaTime;
+
+            if (soundSilvido.isPlaying && stopSilbidoCoroutine == null)
+            {
+                stopSilbidoCoroutine = StartCoroutine(StopSilbidoAfterDelay());
+            }
+        }
+    }
+
+    private IEnumerator StopSilbidoAfterDelay()
+    {
+        yield return new WaitForSeconds(silbidoFadeDelay);
+        soundSilvido.Stop();
+        stopSilbidoCoroutine = null;
+    }
+
+    private void CalculateStatePlayer(float value)
+    {
+        if (value <= 0)
+        {
+            GameManager.instance.Fail();
+        }
+        else if (value < 5 && value > 0)
+        {
+            statePlayer.sprite = arrayStatesPlayer[0];
+        }
+        else if (value >= 5 && value < 12)
+        {
+            statePlayer.sprite = arrayStatesPlayer[1];
+        }
+        else if (value >= 12 && value < 20)
+        {
+            statePlayer.sprite = arrayStatesPlayer[2];
+        }
+        else
+        {
+            GameManager.instance.Fail();
         }
     }
 
@@ -104,18 +148,21 @@ public class UIManager : MasterManager
             });
         }
     }
-
     private void DoPause()
     {
         PauseGame(panelPause);
     }
-
-
-
-
-
-
-
+    public void IncrementPieceCount()
+    {
+        numPieces++;
+        textCountPieces.text = numPieces.ToString("00") + "/06";
+        if (numPieces >= 6)
+        {
+            textCountPieces.text = numPieces.ToString("00") + "/06";
+            OnPiecePuzzleComplete?.Invoke();
+            GameManager.instance.Win();
+        }
+    }
 
 
 
