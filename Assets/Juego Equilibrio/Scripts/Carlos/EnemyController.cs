@@ -28,6 +28,10 @@ public class EnemyController : MonoBehaviour
 
     private Vector3 center2;
 
+    [Header("Speed Settings")]
+    [SerializeField] private float baseSpeed = 3.5f;
+    [SerializeField] private float speedIncreasePerSound = 0.5f;
+    [SerializeField] private float maxSpeed = 7f;
 
     private void Reset()
     {
@@ -45,6 +49,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         stateEnemy = StateEnemy.Patrol;
+        agent.speed = baseSpeed;
     }
 
     private void Update()
@@ -61,11 +66,14 @@ public class EnemyController : MonoBehaviour
                 CheckDoorInteraction();
                 break;
             case StateEnemy.Atack:
+                CheckDoorInteraction();
                 break;
             case StateEnemy.IrDondeLabulla:
+                CheckDoorInteraction();
                 break;
         }
     }
+
     private void Patrol()
     {
         if (points.Length == 0) return;
@@ -82,6 +90,7 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
     private IEnumerator RotateThenMove(Vector3 destination)
     {
         isRotating = true;
@@ -96,27 +105,12 @@ public class EnemyController : MonoBehaviour
             yield return null;
         }
 
-        transform.rotation = targetRotation; 
+        transform.rotation = targetRotation;
 
         isRotating = false;
         agent.isStopped = false;
         Destination(destination);
     }
-    //private void Patrol()
-    //{
-    //    if (points.Length == 0) return;
-
-    //    if (!agent.pathPending && agent.remainingDistance <= arriveDistance)
-    //    {
-    //        patrolTimer += Time.deltaTime;
-
-    //        if (patrolTimer >= patrolWaitTime)
-    //        {
-    //            patrolTimer = 0f;
-    //            Destination(GetRandomPoint(transform.position, radioRamdom));
-    //        }
-    //    }
-    //}
 
     private void GoToNextPoint()
     {
@@ -159,11 +153,12 @@ public class EnemyController : MonoBehaviour
         Destination(position);
     }
 
-    private void GetSoundPosition(Vector3 position,float distance)
+    private void GetSoundPosition(Vector3 position, float distance)
     {
         if (Vector3.Distance(transform.position, position) < distance)
         {
-            Destination(position);
+            agent.speed = Mathf.Min(agent.speed + speedIncreasePerSound, maxSpeed);
+            Ir(position);
         }
     }
 
@@ -194,15 +189,16 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
-        //Item.OnEventSound += GetSoundPosition;
+        Item.OnEventSound += GetSoundPosition;
         PlayerController.OnEventSound += GetSoundPosition;
     }
 
     private void OnDisable()
     {
-        //Item.OnEventSound -= GetSoundPosition;
-        PlayerController.OnEventSound += GetSoundPosition;
+        Item.OnEventSound -= GetSoundPosition;
+        PlayerController.OnEventSound -= GetSoundPosition;
     }
+
     private enum StateEnemy
     {
         Patrol,

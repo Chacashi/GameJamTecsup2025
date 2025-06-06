@@ -10887,7 +10887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4046793996359451983, guid: adad1dc41bc34b748bd28878572d5e83, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6271929240933412579, guid: adad1dc41bc34b748bd28878572d5e83, type: 3}
       propertyPath: 'points.Array.data[0]'
@@ -12308,7 +12308,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1641140228}
   - {fileID: 1434876106}
   - {fileID: 1243416893}
   - {fileID: 373644429}
