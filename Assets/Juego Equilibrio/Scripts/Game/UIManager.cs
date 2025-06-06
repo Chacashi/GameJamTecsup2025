@@ -107,7 +107,7 @@ public class UIManager : MasterManager
         {
             statePlayer.sprite = arrayStatesPlayer[1];
         }
-        else if (value >= 12 && value < 20)
+        else if (value >= 12 && value < 19.5)
         {
             statePlayer.sprite = arrayStatesPlayer[2];
         }
