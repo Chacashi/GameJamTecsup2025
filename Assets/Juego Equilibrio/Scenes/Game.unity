@@ -6200,6 +6200,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b997a3f34a7676f468eb217b4a6794e4, type: 3}
+--- !u!1 &1122266359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5417446410433509369, guid: 192cfcedfd9988c4e9790717b5b15959, type: 3}
+  m_PrefabInstance: {fileID: 4008207195404335874}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1123180824
 GameObject:
   m_ObjectHideFlags: 0
@@ -7728,7 +7733,7 @@ MonoBehaviour:
   canvas1: {fileID: 1513235710}
   canvas2: {fileID: 1916619406}
   fade: {fileID: 1422842858}
-  CameraMain: {fileID: 1641152662}
+  CameraMain: {fileID: 1122266359}
   CameraPortal: {fileID: 128094009}
 --- !u!4 &1275222556
 Transform:
@@ -9482,11 +9487,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec004691dffdc6442a85ff705c88e0ea, type: 3}
---- !u!1 &1641152662 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9117135061172083599, guid: 192cfcedfd9988c4e9790717b5b15959, type: 3}
-  m_PrefabInstance: {fileID: 4008207195404335874}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1642345990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22126,6 +22126,10 @@ PrefabInstance:
       propertyPath: objectLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 3117235118039842093, guid: 192cfcedfd9988c4e9790717b5b15959, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 6f38903b798d54747b094f0df9646eeb, type: 2}
     - target: {fileID: 4352613734229745621, guid: 192cfcedfd9988c4e9790717b5b15959, type: 3}
       propertyPath: m_IsKinematic
       value: 0
