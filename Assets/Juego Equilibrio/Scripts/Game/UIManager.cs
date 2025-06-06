@@ -15,6 +15,7 @@ public class UIManager : MasterManager
     [SerializeField] private CanvasGroup panelPause;
     [SerializeField] private TMP_Text textCountPieces;
     [SerializeField] private float numPieces = 0;
+    [SerializeField] private float valueSubstract;
 
     public static event Action OnPiecePuzzleComplete;
 
@@ -77,7 +78,7 @@ public class UIManager : MasterManager
     {
         if (barTime.value > barTime.minValue)
         {
-            barTime.value -= Time.deltaTime;
+            barTime.value -= Time.deltaTime * valueSubstract;
 
             if (soundSilvido.isPlaying && stopSilbidoCoroutine == null)
             {
