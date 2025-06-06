@@ -40,6 +40,7 @@ public class LaunchObject : Item
                     launchModifier = 0;
                     transform.SetParent(null);
                     GetComponent<Collider>().enabled = true;
+                    input = false;
                 }
                 lineRenderer.enabled = false;
             }

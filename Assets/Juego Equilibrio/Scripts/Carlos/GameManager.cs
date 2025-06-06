@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
     [Header("Cameras")]
     [SerializeField] private GameObject CameraMain;
     [SerializeField] private GameObject CameraPortal;
+    private bool isInMainCamera = true;
+    private bool isSwitchingCamera = false;
 
     private void Awake()
     {
@@ -44,6 +47,9 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         RandomPosition();
+        CameraMain.SetActive(true);
+        CameraPortal.SetActive(false);
+        isInMainCamera = true;
     }
     private void Update()
     {
@@ -63,7 +69,8 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateCamera()
     {
-        StartCoroutine(SwitchCameraWithFade());
+        if (!isSwitchingCamera)
+            StartCoroutine(SwitchCameraWithFade());
     }
     private void RandomPosition()
     {
@@ -105,6 +112,7 @@ public class GameManager : MonoBehaviour
     }
     public void Win()
     {
+        UpdateCamera();
         OnPiecesCmplete?.Invoke();
         //ui.FadePanelIn(canvas2);
         //Cursor.lockState = CursorLockMode.None;
@@ -117,11 +125,12 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator SwitchCameraWithFade()
     {
-        fade.FadeIN();
+        isSwitchingCamera = true;
 
+        fade.FadeIN();
         yield return new WaitForSeconds(fade.TimeFadeIN);
 
-        if (CameraMain.activeSelf)
+        if (isInMainCamera)
         {
             CameraMain.SetActive(false);
             CameraPortal.SetActive(true);
@@ -132,7 +141,12 @@ public class GameManager : MonoBehaviour
             CameraPortal.SetActive(false);
         }
 
+        isInMainCamera = !isInMainCamera;
+
         fade.FadeOut();
+        yield return new WaitForSeconds(fade.TimeFadeOut); // Si no existe, agrega esta variable en el script DoFade
+
+        isSwitchingCamera = false;
     }
 }
 
