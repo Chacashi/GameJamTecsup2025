@@ -112,12 +112,15 @@ public class GameManager : MonoBehaviour
     }
     public void Win()
     {
+        ui.FadePanelIn(canvas2);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+    }
+    public void Complete()
+    {
         UpdateCamera();
         OnPiecesCmplete?.Invoke();
-        //ui.FadePanelIn(canvas2);
-        //Cursor.lockState = CursorLockMode.None;
-        //Cursor.visible = true;
-        //Time.timeScale = 0;
     }
     public void CheckRompeCabezas()
     {

@@ -160,7 +160,7 @@ public class UIManager : MasterManager
         {
             textCountPieces.text = numPieces.ToString("00") + "/06";
             OnPiecePuzzleComplete?.Invoke();
-            GameManager.instance.Win();
+            GameManager.instance.Complete();
         }
     }
 

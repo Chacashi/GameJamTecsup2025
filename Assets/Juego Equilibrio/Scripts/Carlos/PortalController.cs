@@ -21,4 +21,11 @@ public class PortalController : MonoBehaviour
     {
         GameManager.OnPiecesCmplete -= PiecesCmplete;
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            GameManager.instance.Win();
+        }
+    }
 }
