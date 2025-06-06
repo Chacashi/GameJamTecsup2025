@@ -4632,7 +4632,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xBFQuieres Salir?"
+  m_text: "\xBFQUIERES SALIR?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c53d55ebd097fb48a504398e2da6aa5, type: 2}
   m_sharedMaterial: {fileID: -2511649446897637049, guid: 8c53d55ebd097fb48a504398e2da6aa5, type: 2}
